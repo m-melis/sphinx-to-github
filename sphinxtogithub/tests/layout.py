@@ -3,6 +3,7 @@ from sphinxtogithub.tests import MockExists, MockRemove
 
 import sphinxtogithub
 import unittest
+import functools
 
 class MockHandler(object):
 
@@ -33,8 +34,8 @@ class TestLayout(unittest.TestCase):
         layout.process()
 
         # Check all handlers are processed by reducing them with "and"
-        self.assert_(reduce(lambda x, y: x and y.processed, directory_handlers, True))
-        self.assert_(reduce(lambda x, y: x and y.processed, file_handlers, True))
+        self.assert_(functools.reduce(lambda x, y: x and y.processed, directory_handlers, True))
+        self.assert_(functools.reduce(lambda x, y: x and y.processed, file_handlers, True))
 
 
 def testSuite():

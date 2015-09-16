@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import codecs
+import io
 import os
 import unittest
 
@@ -71,7 +71,7 @@ class Publish(Command):
         os.system("python setup.py sdist upload")
 
 
-long_description = codecs.open("README.rst", "r", "utf-8").read()
+long_description = io.open("README.rst", "r", encoding="utf-8").read()
 
 setup(
     name='sphinxtogithub',

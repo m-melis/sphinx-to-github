@@ -1,11 +1,13 @@
 #! /usr/bin/env python
  
+from __future__ import print_function, unicode_literals, division, absolute_import
+
 from optparse import OptionParser
 
 import os
 import sys
 import shutil
-import codecs
+import io
 
 
 class DirHelper(object):
@@ -276,12 +278,12 @@ def sphinx_extension(app, exception):
 
     if not app.config.sphinx_to_github:
         if app.config.sphinx_to_github_verbose:
-            print "Sphinx-to-github: Disabled, doing nothing."
+            print("Sphinx-to-github: Disabled, doing nothing.")
         return
 
     if exception:
         if app.config.sphinx_to_github_verbose:
-            print "Sphinx-to-github: Exception raised in main build, doing nothing."
+            print("Sphinx-to-github: Exception raised in main build, doing nothing.")
         return
 
     dir_helper = DirHelper(
@@ -292,7 +294,7 @@ def sphinx_extension(app, exception):
             )
 
     file_helper = FileSystemHelper(
-            lambda f, mode: codecs.open(f, mode, app.config.sphinx_to_github_encoding),
+            lambda f, mode: io.open(f, mode, encoding=app.config.sphinx_to_github_encoding),
             os.path.join,
             shutil.move,
             os.path.exists
@@ -352,7 +354,7 @@ def main(args):
             )
 
     file_helper = FileSystemHelper(
-            lambda f, mode: codecs.open(f, mode, opts.encoding),
+            lambda f, mode: io.open(f, mode, encoding=opts.encoding),
             os.path.join,
             shutil.move,
             os.path.exists
